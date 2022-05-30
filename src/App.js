@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import NavBar from './components/NavBar/NavBar';
+import ServiceData from './components/ServiceData/ServiceData';
+import Admin from "./pages/Admin";
+import Homescreen from "./pages/Homescreen";
+import Login from "./pages/Login";
+import Profile from "./pages/Profile";
+import ServiceBook from "./pages/ServiceBook";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+export default function App() {
+  return (   
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Homescreen/>}>
+          <Route index element={<Homescreen/>} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="booking" element={<ServiceBook />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;
