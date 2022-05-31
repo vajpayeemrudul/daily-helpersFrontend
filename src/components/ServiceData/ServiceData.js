@@ -5,6 +5,7 @@ import ServiceSequence from './ServiceSequence';
 export default function ServiceData() {
 
     const [services, getServices] = useState('');
+    const [tempservices, getTempservices]= useState('');
 
     const url = 'http://localhost:5000/serviceProvider';
 
@@ -17,11 +18,12 @@ export default function ServiceData() {
         .then((response) =>{
             const allServices = response.data;
             getServices(allServices);
+            getTempservices(allServices);
         })
         .catch(error => console.error(`Error: ${error}`));
     }
 
   return (
-    <ServiceSequence services={services}/>
+    <ServiceSequence services={services} tempservices={tempservices}/>
   )
 }

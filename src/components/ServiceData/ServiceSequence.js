@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { NavLink } from "react-router-dom";
 
 export default function ServiceSequence(props) {
   const displayServices = (props) => {
@@ -39,8 +40,8 @@ export default function ServiceSequence(props) {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small">Rate</Button>
-                  <Button size="small">Book Now</Button>
+                  <Button size="small"><NavLink style={{textDecoration:"none", color:"blue"}} to="/ratings">Rate</NavLink></Button>
+                  <Button size="small"><NavLink style={{textDecoration:"none", color:"blue"}} to="/booking">Book Now</NavLink></Button>
                 </CardActions>
               </div>
             </Card>

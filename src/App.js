@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route} from "react-router-dom";
 import NavBar from './components/NavBar/NavBar';
 import ServiceData from './components/ServiceData/ServiceData';
 import Admin from "./pages/Admin";
@@ -14,8 +14,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Homescreen/>}>
           <Route index element={<Homescreen/>} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="booking" element={<ServiceBook />} />
+          <Route exact path="profile" element={<Profile />} />
+          <Route exact path="booking" element={<ServiceBook />} />
         </Route>
       </Routes>
     </BrowserRouter>
