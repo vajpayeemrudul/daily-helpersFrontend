@@ -9,15 +9,14 @@ import Profile from "./pages/Profile";
 import ServiceBook from "./pages/ServiceBook";
 
 export default function App() {
-  return (   
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Homescreen/>}>
-          <Route index element={<Homescreen/>} />
-          <Route exact path="profile" element={<Profile />} />
-          <Route exact path="booking" element={<ServiceBook />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+  return (  
+    <Login/> 
+    // <BrowserRouter>
+    //   <Routes>
+    //     <Route path="/" element={<Homescreen/>}/>
+    //     <Route path="/booking" element={<ServiceBook />}/>
+    //     <Route path="/profile" element={<Profile/>}/>
+    //   </Routes>
+    // </BrowserRouter>
   );
 }

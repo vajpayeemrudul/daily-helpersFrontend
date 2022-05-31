@@ -26,7 +26,7 @@ function Homescreen() {
   function handleSearch()
   {
       alert(search);
-
+      setsearch(search);
   }
 
   return (
@@ -46,7 +46,7 @@ function Homescreen() {
             onClick={handleSearch}>
           Search
       </Button>
-      <ServiceData/>
+      <ServiceData search={search}/>
     </div>
   );
 }

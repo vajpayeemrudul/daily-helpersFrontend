@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import ServiceSequence from './ServiceSequence';
 
-export default function ServiceData() {
+export default function ServiceData(props) {
 
     const [services, getServices] = useState('');
     const [tempservices, getTempservices]= useState('');
@@ -19,6 +19,14 @@ export default function ServiceData() {
             const allServices = response.data;
             getServices(allServices);
             getTempservices(allServices);
+            const search=props.search;
+            if(search.length >0)
+            {
+              const tempsearch=getTempservices.filter(e=>e.service.toLowerCase.includes(search.toLowerCase()));
+              getServices(tempsearch);
+            }
+            // console.log(props);
+            // getTempservices(allServices);
         })
         .catch(error => console.error(`Error: ${error}`));
     }

@@ -12,7 +12,7 @@ export default function ServiceSequence(props) {
     const { services } = props;
     if (services.length > 0) {
       return services.map((service, index) => {
-        console.log(service);
+        // console.log(service);
         return (
           <div className='service' key={service._id}>
             <Card sx={{ maxWidth: 645 }}>
@@ -40,8 +40,10 @@ export default function ServiceSequence(props) {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small"><NavLink style={{textDecoration:"none", color:"blue"}} to="/ratings">Rate</NavLink></Button>
-                  <Button size="small"><NavLink style={{textDecoration:"none", color:"blue"}} to="/booking">Book Now</NavLink></Button>
+                  <Button size="small" onClick={()=>{
+                        window.href="/bookings"
+                  }}><NavLink style={{textDecoration:"none", color:"blue"}} to="/ratings">Rate</NavLink></Button>
+                  <Button size="small" ><NavLink style={{textDecoration:"none", color:"blue"}} to="/booking">Book Now</NavLink></Button>
                 </CardActions>
               </div>
             </Card>
