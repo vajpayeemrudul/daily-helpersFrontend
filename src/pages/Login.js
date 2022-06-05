@@ -10,18 +10,17 @@ function Login() {
 
 const [entry, setEntry] = useState(true);
 const [details, setdetails] = useState({
-    fullname: "",
+    username: "",
     password: "",
-    email: "",
   });
 
   async function sendData() {
-    alert(JSON.stringify(details));
-    const response = await axios
-      .post("http://localhost:5000/login", details)
-      .catch((err) => {
-        console.log(err);
-      });
+    // alert(JSON.stringify(details));
+    // const response = await axios
+    //   .post("http://localhost:5000/login", details)
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }
 
   function handleChange(event) {
@@ -36,7 +35,7 @@ const [details, setdetails] = useState({
   }
 
   function handleEntry() {
-    setEntry((current) => !current);
+    window.href="../create";
   }
 
     
@@ -54,10 +53,10 @@ const [details, setdetails] = useState({
           {entry ? (
             <TextField
               required
-              id="fullname"
-              name="fullname"
+              id="username"
+              name="username"
               value={details.fullname}
-              label="Full name"
+              label="Username"
               onChange={handleChange}
             />
           ) : (
@@ -73,22 +72,13 @@ const [details, setdetails] = useState({
             value={details.password}
             onChange={handleChange}
           />
-          <TextField
-            required
-            id="email"
-            name="email"
-            label="email-id"
-            type="email"
-            value={details.email}
-            onChange={handleChange}
-          />
           <Button
             type="submit"
             variant="outlined"
             color="primary"
             onClick={sendData}
           >
-            SignUp
+            Login In
           </Button>
           <Button
             type="submit"
@@ -96,7 +86,7 @@ const [details, setdetails] = useState({
             color="primary"
             onClick={handleEntry}
           >
-            Already Have an Account?
+            Create Account
           </Button>
         </div>
       </Box>

@@ -14,14 +14,20 @@ import axios from "axios";
 import { CatchingPokemon } from "@mui/icons-material";
 import ServiceData from "../components/ServiceData/ServiceData";
 
-function Homescreen() {
+function Homescreen(props) {
+
+  if(props.userData.id === "")
+  {
+    window.location="/login";
+  }
+
   const [loading, setloading] = useState(false);
   const [search, setsearch] = useState("");
   const [services, setservices] = useState([]);
   const [error, seterror] = useState(false);
   const [tempservices, settempservices] = useState([]);
 
-
+  
 
   function handleSearch()
   {

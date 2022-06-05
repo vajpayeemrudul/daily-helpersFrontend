@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Card from "@mui/material/Card";
-import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import {
   Button,
@@ -19,41 +17,29 @@ function CreateAccount() {
     password: "",
     location: "",
     profileImg: "",
-    service: "",
-    charge: "",
   };
 
   const [formData, setFormData] = useState(initialState);
-  const [usertype, setuserType] = useState();
+  const [serviceProviderData, setData] = useState({ service: '', charge: '' });
+  const [usertype, setuserType] = useState("customer");
 
   async function sendData() {
-    let accountData = new FormData();
-
-    accountData.append("name",formData.name);
-    accountData.append("username",formData.username);
-    accountData.append("password",formData.password);
-    accountData.append("location",formData.location);
-    accountData.append("profileImg",formData.profileImg);
-    accountData.append("service",formData.service);
-    accountData.append("charge",formData.charge);
-    let temp="";
-    if(usertype==="admin")
-      temp="https://localhost:5000/admin";
-    else if(usertype==="admin")
-      temp="https://localhost:5000/customer";
-    else
-      temp="https://localhost:5000/serviceProvider";
-
+    let temp = "http://localhost:5000/";
     try{
-         const response = await axios({
-           method: "post",
-           url: temp,
-           data: accountData,
-           headers:{"Content-Type": "multipart/form-data"}
-         });
+      await axios.post(temp + 'customer', formData)
+      .then(async data => {
+        if(usertype === 'serviceProvider') {
+          console.log(serviceProviderData);
+          await axios.post(temp + 'serviceProvider', {
+            service: serviceProviderData.service, 
+            charge: serviceProviderData.charge, 
+            id: data.data.id
+          })
+          .then(data => console.log("data Saved !!", data));
+        }
+      });
     }
-    catch(error)
-    {
+    catch(error) {
       console.log(error);
     }
     setFormData(initialState);
@@ -116,11 +102,11 @@ function CreateAccount() {
           >
             <MenuItem value="admin">Admin</MenuItem>
             <MenuItem value="customer">Customer</MenuItem>
-            <MenuItem value="serviceprovider">ServiceProvider</MenuItem>
+            <MenuItem value="serviceProvider">Service Provider</MenuItem>
           </Select>
         </FormControl>
       </Grid>
-      {usertype === "serviceprovider" ? (
+      {usertype === "serviceProvider" ? (
         <div>
           <Grid container spacing={2}>
             <Grid item xs={4}>
@@ -128,9 +114,9 @@ function CreateAccount() {
                 type="text"
                 label="Service"
                 fullWidth
-                value={formData.service}
+                value={serviceProviderData.service}
                 onChange={(e) =>
-                  setFormData({ ...formData, service: e.target.value })
+                  setData({ ...serviceProviderData, service: e.target.value })
                 }
               ></TextField>
             </Grid>
@@ -139,9 +125,9 @@ function CreateAccount() {
                 type="number"
                 label="Base Charge"
                 fullWidth
-                value={formData.charge}
+                value={serviceProviderData.charge}
                 onChange={(e) =>
-                  setFormData({ ...formData, charge: e.target.value })
+                  setData({ ...serviceProviderData, charge: e.target.value })
                 }
               ></TextField>
             </Grid>

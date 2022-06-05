@@ -35,8 +35,8 @@ export default function NavBar() {
               <Button>{user.name}</Button>
             ) : (
               <div>
-                <Button color="inherit">Register</Button>
-                <Button color="inherit">Login</Button>
+                <Button color="white">Register</Button>
+                <Button color="white">Login</Button>
               </div>
             )}
           </Toolbar>
