@@ -21,10 +21,10 @@ const styles = theme => ({
 });
 
 function Homescreen(props) {
-  if(props.userData.id === "")
-  {
-    window.location="/login";
-  }
+  // if(props.userData.id === "")
+  // {
+  //   window.location="/login";
+  // }
 
   const [loading, setloading] = useState(false);
   const [search, setsearch] = useState("");

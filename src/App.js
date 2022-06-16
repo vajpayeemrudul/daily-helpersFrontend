@@ -8,10 +8,11 @@ import Homescreen from "./pages/Homescreen";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import ServiceBook from "./pages/ServiceBook";
+import SignRegister from './pages/CreateAccount/SignRegister';
 
 export default function App() {
 
-  const [userData,setUserData]= useState({id:"",type:""}); 
+  const [userData,setUserData]= useState({id:"",type:""});
   return (  
     // <Profile id="629c79bdd1726dce31d55b68" userType="customer"/>
     <BrowserRouter>
@@ -20,7 +21,7 @@ export default function App() {
         <Route path="/booking" element={<ServiceBook />}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/create" element={<CreateAccount/>}/>
-        <Route path='/login' element={<Login/>}/>
+        <Route path='/login' element={<SignRegister/>}/>
       </Routes>
     </BrowserRouter>
   );
