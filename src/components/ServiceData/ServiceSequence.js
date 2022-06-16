@@ -14,7 +14,7 @@ export default function ServiceSequence(props) {
       return services.map((service, index) => {
         // console.log(service);
         return (
-          <div className='service' key={service._id}>
+          <div className="service" key={service._id}>
             <Card sx={{ maxWidth: 645 }}>
               <div>
                 <CardMedia
@@ -26,7 +26,7 @@ export default function ServiceSequence(props) {
               </div>
               <div>
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
+                  <Typography variant="h5" component="div">
                     {service.service}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
@@ -40,10 +40,27 @@ export default function ServiceSequence(props) {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" onClick={()=>{
-                        window.href="/bookings"
-                  }}><NavLink style={{textDecoration:"none", color:"blue"}} to="/ratings">Rate</NavLink></Button>
-                  <Button size="small" ><NavLink style={{textDecoration:"none", color:"blue"}} to="/booking">Book Now</NavLink></Button>
+                  <Button
+                    size="small"
+                    onClick={() => {
+                      window.href = "/bookings";
+                    }}
+                  >
+                    <NavLink
+                      style={{ textDecoration: "none", color: "blue" }}
+                      to="/ratings"
+                    >
+                      Rate
+                    </NavLink>
+                  </Button>
+                  <Button size="small">
+                    <NavLink
+                      style={{ textDecoration: "none", color: "blue" }}
+                      to="/booking"
+                    >
+                      Book Now
+                    </NavLink>
+                  </Button>
                 </CardActions>
               </div>
             </Card>

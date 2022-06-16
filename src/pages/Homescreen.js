@@ -14,8 +14,13 @@ import axios from "axios";
 import { CatchingPokemon } from "@mui/icons-material";
 import ServiceData from "../components/ServiceData/ServiceData";
 
-function Homescreen(props) {
+const styles = theme => ({
+  multilineColor:{
+      color:'red'
+  }
+});
 
+function Homescreen(props) {
   if(props.userData.id === "")
   {
     window.location="/login";
@@ -27,32 +32,31 @@ function Homescreen(props) {
   const [error, seterror] = useState(false);
   const [tempservices, settempservices] = useState([]);
 
-  
-
-  function handleSearch()
-  {
-      alert(search);
-      setsearch(search);
+  function handleSearch() {
+    alert(search);
+    setsearch(search);
   }
 
   return (
-    <div>
+    <div className="homescreen">
       <NavBar />
-      <TextField
-        id="search"
-        name="searchtag"
-        label="Search Service"
-        type="text"
-        variant="standard"
-        value={search}
-        onChange={e=>setsearch(e.target.value)}
-      />
-      <Button variant="outlined"
-            color="primary"
-            onClick={handleSearch}>
+      <div className="search-section">
+        <TextField
+          id="search"
+          name="searchtag"
+          label="Search Service"
+          type="text"
+          backgroundColor="rgb(214, 210, 210)"
+          value={search}
+          onChange={(e) => setsearch(e.target.value)}
+        />
+        <Button variant="contained" color="primary" onClick={handleSearch}>
           Search
-      </Button>
-      <ServiceData search={search}/>
+        </Button>
+      </div>
+      <div className="display-section">
+        <ServiceData search={search} />
+      </div>
     </div>
   );
 }
