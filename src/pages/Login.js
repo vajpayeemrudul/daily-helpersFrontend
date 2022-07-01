@@ -29,16 +29,8 @@ function Login(props) {
       {
         console.log(response.data);
         localStorage.setItem('dailyHelper',JSON.stringify(response.data));
-        console.log(localStorage.dailyHelper);
-        // props.setUserData(prevState=>{
-        //   return{...prevState, id:response.data.id, type: response.data.type}
-        // })
-          // props.setUserData({
-          //   id:response.data.id,
-          //   type:response.data.position
-          // })
-          
-          window.location="/";       
+        console.log(localStorage.dailyHelper);   
+        window.location="/";       
       }
     }
     catch(error)
@@ -101,82 +93,6 @@ function Login(props) {
             </Paper>
         </Grid>
     </>
-
-    
-
-    // <div>
-    //   <NavBar />
-    //   <div className="login">
-    //     <Card
-    //       sx={{ maxWidth: 500 }}
-    //       style={{
-    //         backgroundColor: "rgb(214, 210, 210)",
-    //         height: "30vh",
-    //         width: "70vw",
-    //         borderRadius: "7px",
-    //         position: "absolute",
-    //         top: "200px",
-    //         right: "650px",
-    //       }}
-    //     >
-    //       <Box
-    //         component="form"
-    //         sx={{
-    //           "& .MuiTextField-root": { m: 1, width: "25ch" },
-    //         }}
-    //         noValidate
-    //         autoComplete="off"
-    //       >
-    //         <div>
-    //           {entry ? (
-    //             <TextField
-    //               required
-    //               id="username"
-    //               name="username"
-    //               value={details.fullname}
-    //               label="Username"
-    //               onChange={handleChange}
-    //             />
-    //           ) : (
-    //             <h1>Login below</h1>
-    //           )}
-    //           <TextField
-    //             required
-    //             id="passowrd"
-    //             name="password"
-    //             label="Password"
-    //             type="password"
-    //             value={details.password}
-    //             onChange={handleChange}
-    //           />
-    //           <div className="login-buttons">
-    //             <div className="login">
-    //               <Button
-    //                 type="submit"
-    //                 variant="contained"
-    //                 color="primary"
-    //                 onClick={sendData}
-    //               >
-    //                 Login In
-    //               </Button>
-    //             </div>
-    //             <div className="create-account">
-    //               <p>Are You are a New User?</p>
-    //               <Button
-    //                 type="submit"
-    //                 variant="contained"
-    //                 color="primary"
-    //                 onClick={handleEntry}
-    //               >
-    //                 Create Account
-    //               </Button>
-    //             </div>
-    //           </div>
-    //         </div>
-    //       </Box>
-    //     </Card>
-    //   </div>
-    // </div>
   );
 }
 
