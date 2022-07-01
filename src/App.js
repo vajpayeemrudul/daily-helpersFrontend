@@ -11,17 +11,17 @@ import ServiceBook from "./pages/ServiceBook";
 import SignRegister from './pages/CreateAccount/SignRegister';
 
 export default function App() {
-
-  const [userData,setUserData]= useState({id:"",type:""});
+  const [userData,setUserData]= useState({id: "",type:""});
   return (  
     // <Profile id="629c79bdd1726dce31d55b68" userType="customer"/>
+    
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Homescreen userData={userData}/>}/>
         <Route path="/booking" element={<ServiceBook />}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/create" element={<CreateAccount/>}/>
-        <Route path='/login' element={<SignRegister/>}/>
+        <Route path='/login' element={<SignRegister setUserData={setUserData} userData={userData}/>}/>
       </Routes>
     </BrowserRouter>
   );

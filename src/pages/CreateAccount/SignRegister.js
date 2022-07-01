@@ -5,7 +5,7 @@ import Login from '../Login';
 import CreateAccount from './CreateAccount';
 import NavBar from '../../components/NavBar/NavBar';
 
-function SignRegister() {
+function SignRegister(props) {
 
     const [value,setValue]= useState(0);
     const tabChange = (event, newValue) => {
@@ -43,7 +43,7 @@ function SignRegister() {
              <Tab label="Sign Up"/>
        </Tabs>
        <TabelPanel value={value} index={0}>
-           <Login tabChange={tabChange}/>
+           <Login tabChange={tabChange} setUserData={props.setUserData} userData={props.userData}/>
        </TabelPanel>
        <TabelPanel value={value} index={1}>
            <CreateAccount/>

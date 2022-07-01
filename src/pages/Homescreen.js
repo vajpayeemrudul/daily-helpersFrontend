@@ -14,18 +14,20 @@ import axios from "axios";
 import { CatchingPokemon } from "@mui/icons-material";
 import ServiceData from "../components/ServiceData/ServiceData";
 
-const styles = theme => ({
-  multilineColor:{
-      color:'red'
-  }
+const styles = (theme) => ({
+  multilineColor: {
+    color: "red",
+  },
 });
 
 function Homescreen(props) {
-  // if(props.userData.id === "")
-  // {
-  //   window.location="/login";
-  // }
+  let data = null;
+  if (localStorage.dailyHelper) {
+    data = localStorage.dailyHelper;
+  }
 
+  // return (<h1>Done</h1>);
+  console.log(data);
   const [loading, setloading] = useState(false);
   const [search, setsearch] = useState("");
   const [services, setservices] = useState([]);
@@ -40,23 +42,24 @@ function Homescreen(props) {
   return (
     <div className="homescreen">
       <NavBar />
-      <div className="search-section">
-        <TextField
-          id="search"
-          name="searchtag"
-          label="Search Service"
-          type="text"
-          backgroundColor="rgb(214, 210, 210)"
-          value={search}
-          onChange={(e) => setsearch(e.target.value)}
-        />
-        <Button variant="contained" color="primary" onClick={handleSearch}>
-          Search
-        </Button>
-      </div>
-      <div className="display-section">
-        <ServiceData search={search} />
-      </div>
+      <Grid container spacing={0} direction="row" justifyContent={"flex-start"} >
+      <TextField id="search" name="searchtag" label="Search Service" type="text" style={{backgroundColor:"#fff",borderRadius:"8px"}} 
+            value={search}
+            onChange={(e) => setsearch(e.target.value)}
+          />
+          <Button variant="contained" color="primary" onClick={handleSearch}>
+            Search
+          </Button>
+        <Grid xs={3} md={4}  direction="row" container spacing={2} justifyContent="center" alignItems="center">
+          
+        </Grid>
+        {/* <Grid item xs={2} md={3}>
+          
+        </Grid> */}
+        <Grid item xs={12} md={12} direction="row" container spacing={2} justifyContent="center" alignItems="center">
+          <ServiceData search={search} />
+        </Grid>
+      </Grid>
     </div>
   );
 }

@@ -9,10 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 export default function NavBar() {
   const user = JSON.parse(localStorage.getItem("currentUser"));
-  function logout() {
-    localStorage.removeItem("currentUser");
-    window.location.href = "/login";
-  }
+  
 
   return (
     <div>
@@ -31,13 +28,17 @@ export default function NavBar() {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               DailyHelpers
             </Typography>
-            {user ? (
-              <Button>{user.name}</Button>
+            {localStorage.dailyHelper ? (
+              <Button variant="outlined" style={{backgroundColor:"#fff"}} onClick={()=>{
+                alert("Are you sure to Logout !");
+                localStorage.removeItem('dailyHelper');
+                window.location='/';
+              }}>Logout</Button>
             ) : (
-              <div>
-                <Button color="white">Register</Button>
-                <Button color="white">Login</Button>
-              </div>
+                <Button variant="outlined" style={{backgroundColor:"#fff"}} onClick={()=>{
+                  localStorage.removeItem('dailyHelper');
+                  window.location='/login';
+                }}>Login</Button>
             )}
           </Toolbar>
         </AppBar>

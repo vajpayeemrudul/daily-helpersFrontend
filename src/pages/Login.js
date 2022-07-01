@@ -10,26 +10,47 @@ import { Grid,Paper, Avatar, Typography,Link } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-
-function Login({tabChange}) {
+import { RepeatOneSharp } from "@mui/icons-material";
+//tabChange,setUserData
+function Login(props) {
   const [entry, setEntry] = useState(true);
   const [details, setdetails] = useState({
     username: "",
     password: "",
   });
 
-  async function sendData() {
+  async function Login() {
+    
     // alert(JSON.stringify(details));
-    // const response = await axios
-    //   .post("http://localhost:5000/login", details)
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    try{
+      const response = await axios.post("http://localhost:5000/", details);
+      console.log(response.data.id);
+      if(response.data.message === "Ok")
+      {
+        console.log(response.data);
+        localStorage.setItem('dailyHelper',JSON.stringify(response.data));
+        console.log(localStorage.dailyHelper);
+        // props.setUserData(prevState=>{
+        //   return{...prevState, id:response.data.id, type: response.data.type}
+        // })
+          // props.setUserData({
+          //   id:response.data.id,
+          //   type:response.data.position
+          // })
+          
+          window.location="/";       
+      }
+    }
+    catch(error)
+    {
+         console.log(error);
+    }  
   }
 
   function handleChange(event) {
-    const { name, value } = event.target;
-
+    const  name = event.target.name;
+    const value = event.target.value;
+    // console.log(name,value);
     setdetails((prevValue) => {
       return {
         ...prevValue,
@@ -55,8 +76,8 @@ function Login({tabChange}) {
                      <Avatar style={avatarStyle}><AccountCircleIcon/></Avatar>
                     <h2>Sign In</h2>
                 </Grid>
-                <TextField label='Username' placeholder='Enter username' value={details.fullname} onChange={handleChange} fullWidth required/>
-                <TextField label='Password' placeholder='Enter password' type='password' value={details.password} onChange={handleChange} fullWidth required/>
+                <TextField label='Username' name="username" placeholder='Enter username' value={details.fullname} onChange={handleChange} fullWidth required/>
+                <TextField label='Password' name='password' placeholder='Enter password' type='password' value={details.password} onChange={handleChange} fullWidth required/>
                 <FormControlLabel
                     control={
                     <Checkbox
@@ -66,14 +87,14 @@ function Login({tabChange}) {
                     }
                     label="Remember me"
                  />
-                <Button type='submit' color='primary' variant="contained" style={btnstyle} onClick={sendData} fullWidth>Sign in</Button>
+                <Button type='submit' color='primary' variant="contained" style={btnstyle} onClick={Login} fullWidth>Sign in</Button>
                 <Typography >
                      <Link href="#" >
                         Forgot password ?
                 </Link>
                 </Typography>
                 <Typography > Do you have an account ?
-                     <Link href="#" onClick={()=>tabChange("event",1)} >
+                     <Link href="#" onClick={()=>props.tabChange("event",1)} >
                         Sign Up 
                 </Link>
                 </Typography>
