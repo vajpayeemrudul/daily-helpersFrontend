@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import FileBase64 from 'react-file-base64';
 import { Grid, Paper, Avatar, Typography, TextField, Button } from '@mui/material'
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import Radio from '@mui/material/Radio';
@@ -11,180 +12,105 @@ import {Select,MenuItem,InputLabel} from '@mui/material';
 import axios from "axios";
 
 function CreateAccount() {
-  const initialState = {
+
+  const initialState ={
     name: "",
     username: "",
-    password: "",
+    email: "",
     location: "",
-    profileImg: "",
-  };
+    password: "",
+    confirmpassword: "",
+    service: "",
+    charge: "",
+    profileImg:""
+  }
+
+  const [formData, setFormData] = useState(initialState);
+  const [usertype, setuserType] = useState("customer");
+  // const [serviceProviderData, setData] = useState({ service: '', charge: '' });
+
+  const getBase64 = () => {
+    console.log("base664 avoid")
+    // let file = document.getElementById("image").files[0];
+    //     let reader = new FileReader();
+    //     reader.onloadend = function () {
+    //     setFormData({...formData,profileImg: reader.result});
+    //     console.log(formData);
+    //    };
+    // reader.readAsDataURL(file);
+  }
+  async function sendData(event){
+    // console.log(formData);
+    event.preventDefault();
+    await getBase64();
+
+    let temp = "https://daily-helpers.herokuapp.com/";
+    try{
+     const data= await axios.post(temp + 'customer', formData)
+     console.log(data);
+    }
+    catch(error) {
+      console.log(error);
+    }
+    setFormData(initialState);
+    window.location="/login"
+  }
+
+  // function getBase64(event){
+  //   console.log(event);
+  //   let reader = new FileReader();
+  //   reader.onloadend = function () {
+  //     setFormData({...formData,profileImg: reader.result});
+  // };
+  // reader.readAsDataURL(event.target.files[0]);
+  // }
+
 
   const paperStyle = { padding: 20, width: 300, margin: "0 auto" }
   const headerStyle = { margin: 0 }
   const avatarStyle = { backgroundColor: '#4287f5' }
   const marginTop = { marginTop: 5 }
 
-  const [formData, setFormData] = useState(initialState);
-  const [serviceProviderData, setData] = useState({ service: '', charge: '' });
-  const [usertype, setuserType] = useState("customer");
-
-  async function sendData() {
-    let temp = "http://localhost:5000/";
-    try{
-      await axios.post(temp + 'customer', formData)
-      .then(async data => {
-        if(usertype === 'serviceProvider') {
-          console.log(serviceProviderData);
-          await axios.post(temp + 'serviceProvider', {
-            service: serviceProviderData.service, 
-            charge: serviceProviderData.charge, 
-            id: data.data.id
-          })
-          .then(data => console.log("data Saved !!", data));
-        }
-      });
-    }
-    catch(error) {
-      console.log(error);
-    }
-    setFormData(initialState);
-  }
-
   return (
-    // <Grid>
-    //         <Paper style={paperStyle}>
-    //             <Grid align='center'>
-    //                 <Avatar style={avatarStyle}>
-    //                     <PersonAddIcon/>
-    //                 </Avatar>
-    //                 <h2 style={headerStyle}>Sign Up</h2>
-    //                 <Typography  variant='caption' gutterBottom>Please fill this form to create an account !</Typography>
-    //             </Grid>
-    //             <form>
-    //                 <TextField fullWidth label='Name' placeholder="Enter your name" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})}/>
-    //                 <TextField fullWidth label='Username' value={formData.username} onChange={(e)=>setFormData({...formData,username:e.target.value})} placeholder="Enter your email" />
-    //                 <TextField fullWidth label='location' value={formData.location} onChange={(e)=>setFormData({...formData,location:e.target.value})} placeholder="Enter your location" />
-    //                 <TextField fullWidth label='Password' type="password" placeholder="Enter your password"/>
-    //                 <TextField fullWidth label='Confirm Password' type="password" placeholder="Confirm your password"/>
-    //                 <FormControl fullWidth><InputLabel>Type</InputLabel>
-    //                 <Select value={usertype} onChange={(e) => setuserType(e.target.value)}>
-    //                        <MenuItem value="admin">Admin</MenuItem>
-    //                        <MenuItem value="customer">Customer</MenuItem>
-    //                        <MenuItem value="serviceProvider">Service Provider</MenuItem>
-    //                 </Select>
-    //                 </FormControl>
-    //                 {usertype ==="serviceProvider" ?(
-    //                 <>
-    //                 <TextField type="text" label="Service" fullWidth value={serviceProviderData.service} onChange={(e) =>setData({ ...serviceProviderData, service: e.target.value })}></TextField>
-    //                 <TextField type="number" label="Base Charge" fullWidth value={serviceProviderData.charge} onChange={(e) => setData({ ...serviceProviderData, charge: e.target.value })} ></TextField>
-    //                 </>):(<></>)}
-    //                 <FormControlLabel
-    //                     control={<Checkbox name="checkedA" />}
-    //                     label="I accept the terms and conditions."
-    //                 />
-    //                 <Button type='submit' variant='contained' color='primary' onClick={sendData}>Sign up</Button>
-    //             </form>
-    //         </Paper>
-    //     </Grid>
-    <div className="create-account">
-      <Grid container spacing={2}>
-        <Grid item xs={4}>
-          <TextField
-            type="text"
-            label="Name"
-            fullWidth
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          ></TextField>
+    <Grid>
+            <Paper style={paperStyle}>
+                <Grid align='center'>
+                    <Avatar style={avatarStyle}>
+                        <PersonAddIcon/>
+                    </Avatar>
+                    <h2 style={headerStyle}>Sign Up</h2>
+                    <Typography  variant='caption' gutterBottom>Please fill this form to create an account !</Typography>
+                </Grid>
+                <form>
+                    <TextField fullWidth label='Name' placeholder="Enter your name" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})}/>
+                    <TextField fullWidth label='Username' value={formData.username} onChange={(e)=>setFormData({...formData,username:e.target.value})} placeholder="Enter your email" />
+                    <TextField fullWidth label='Email' value={formData.email} onChange={(e)=>setFormData({...formData,email:e.target.value})} placeholder="Enter your email" />
+                    <TextField fullWidth label='Location' value={formData.location} onChange={(e)=>setFormData({...formData,location:e.target.value})} placeholder="Enter your location" />
+                    <TextField fullWidth label='Password' type="password" value={formData.password} onChange={(e)=>setFormData({...formData,password:e.target.value})}  placeholder="Enter your password"/>
+                    <TextField fullWidth label='Confirm Password' type="password" value={formData.confirmpassword} onChange={(e)=>setFormData({...formData,confirmpassword:e.target.value})}  placeholder="Confirm your password"/>
+                    <FormControl fullWidth><InputLabel>Type</InputLabel>
+                    <Select value={usertype} onChange={(e) => setuserType(e.target.value)}>
+                           <MenuItem value="admin">Admin</MenuItem>
+                           <MenuItem value="customer">Customer</MenuItem>
+                           <MenuItem value="serviceProvider">Service Provider</MenuItem>
+                    </Select>
+                    </FormControl>
+                    {usertype ==="serviceProvider" ?(
+                    <>
+                    <TextField type="text" label="Service" fullWidth value={formData.service} onChange={(e) =>setFormData({ ...formData, service: e.target.value })}></TextField>
+                    <TextField type="number" label="Base Charge" fullWidth value={formData.charge} onChange={(e) => setFormData({ ...formData, charge: e.target.value })} ></TextField>
+                    </>):(<></>)}
+                    <span>Enter Profile Image</span>
+                    <input id="image" type="file" />
+                     
+                    <FormControlLabel
+                        control={<Checkbox name="checkedA" />}
+                        label="I accept the terms and conditions."
+                    />
+                    <Button type="submit" variant='contained' color='primary' onClick={sendData}>Sign up</Button>
+                </form>
+            </Paper>
         </Grid>
-        <Grid item xs={4}>
-          <TextField
-            type="text"
-            label="Username"
-            fullWidth
-            value={formData.username}
-            onChange={(e) =>
-              setFormData({ ...formData, username: e.target.value })
-            }
-          ></TextField>
-        </Grid>
-      </Grid>
-      <Grid container spacing={2}>
-        <Grid item xs={4}>
-          <TextField
-            type="password"
-            label="Password"
-            fullWidth
-            value={formData.password}
-            onChange={(e) =>
-              setFormData({ ...formData, password: e.target.value })
-            }
-          ></TextField>
-        </Grid>
-        <Grid item xs={4}>
-          <TextField
-            type="text"
-            label="location"
-            fullWidth
-            value={formData.location}
-            onChange={(e) =>
-              setFormData({ ...formData, location: e.target.value })
-            }
-          ></TextField>
-        </Grid>
-      </Grid>
-      <Grid item xs={4}>
-        <FormControl fullWidth>
-          <InputLabel>Type</InputLabel>
-          <Select
-            value={usertype}
-            onChange={(e) => setuserType(e.target.value)}
-          >
-            <MenuItem value="admin">Admin</MenuItem>
-            <MenuItem value="customer">Customer</MenuItem>
-            <MenuItem value="serviceProvider">Service Provider</MenuItem>
-          </Select>
-        </FormControl>
-      </Grid>
-      {usertype === "serviceProvider" ? (
-        <div>
-          <Grid container spacing={2}>
-            <Grid item xs={4}>
-              <TextField
-                type="text"
-                label="Service"
-                fullWidth
-                value={serviceProviderData.service}
-                onChange={(e) =>
-                  setData({ ...serviceProviderData, service: e.target.value })
-                }
-              ></TextField>
-            </Grid>
-            <Grid item xs={4}>
-              <TextField
-                type="number"
-                label="Base Charge"
-                fullWidth
-                value={serviceProviderData.charge}
-                onChange={(e) =>
-                  setData({ ...serviceProviderData, charge: e.target.value })
-                }
-              ></TextField>
-            </Grid>
-          </Grid>
-        </div>
-      ) : (
-        <></>
-      )}
-      <Button
-        type="submit"
-        variant="outlined"
-        color="primary"
-        onClick={sendData}
-      >
-        Create Account
-      </Button>
-    </div>
   );
 }
 

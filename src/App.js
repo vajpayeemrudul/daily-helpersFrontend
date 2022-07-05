@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import ServiceBook from "./pages/ServiceBook";
 import SignRegister from './pages/CreateAccount/SignRegister';
+import ProfileDriver from './pages/ProfileDriver';
 
 export default function App() {
   const [userData,setUserData]= useState({id: "",type:""});
@@ -19,7 +20,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Homescreen userData={userData}/>}/>
         <Route path="/booking" element={<ServiceBook />}/>
-        <Route path="/profile" element={<Profile/>}/>
+        <Route path="/profile" element={<ProfileDriver/>}/>
         <Route path="/create" element={<CreateAccount/>}/>
         <Route path='/login' element={<SignRegister setUserData={setUserData} userData={userData}/>}/>
       </Routes>

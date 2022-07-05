@@ -23,14 +23,18 @@ function Login(props) {
     
     // alert(JSON.stringify(details));
     try{
-      const response = await axios.post("http://localhost:5000/", details);
-      console.log(response.data.id);
+      const response = await axios.post("https://daily-helpers.herokuapp.com/", details);
+      // console.log(response.data);
       if(response.data.message === "Ok")
       {
-        console.log(response.data);
+        // console.log(response.data);
         localStorage.setItem('dailyHelper',JSON.stringify(response.data));
-        console.log(localStorage.dailyHelper);   
+        // console.log(localStorage.dailyHelper);   
         window.location="/";       
+      }
+      else
+      {
+        alert("Wrong Credentials");
       }
     }
     catch(error)

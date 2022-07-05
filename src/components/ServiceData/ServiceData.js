@@ -4,10 +4,10 @@ import ServiceSequence from './ServiceSequence';
 
 export default function ServiceData(props) {
 
-    const [services, getServices] = useState('');
+    const [services, setServices] = useState([]);
     const [tempservices, getTempservices]= useState('');
 
-    const url = 'http://localhost:5000/serviceProvider';
+    const url = 'https://daily-helpers.herokuapp.com/serviceProvider';
 
     useEffect(()=>{
         getAllServices();
@@ -16,15 +16,17 @@ export default function ServiceData(props) {
     const getAllServices = ()=>{
         axios.get(`${url}`)
         .then((response) =>{
+          // console.log(response.data);
             const allServices = response.data;
-            getServices(allServices);
-            getTempservices(allServices);
-            const search=props.search;
-            if(search.length >0)
-            {
-              const tempsearch=getTempservices.filter(e=>e.service.toLowerCase.includes(search.toLowerCase()));
-              getServices(tempsearch);
-            }
+            setServices(allServices);
+            
+            // getTempservices(allServices);
+            // const search=props.search;
+            // if(search.length >0)
+            // {
+            //   const tempsearch=getTempservices.filter(e=>e.service.toLowerCase.includes(search.toLowerCase()));
+            //   getServices(tempsearch);
+            // }
             // console.log(props);
             // getTempservices(allServices);
         })

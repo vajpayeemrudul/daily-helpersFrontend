@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -9,8 +10,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 export default function NavBar() {
   const user = JSON.parse(localStorage.getItem("currentUser"));
-  
-
+  // const [address,setAdress]= useState("");
+  // let temp=window.location.href;
+  // temp=temp.split("/");
+  // setAdress(temp[temp.length-1]);
+  // console.log(address);
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
@@ -35,10 +39,11 @@ export default function NavBar() {
                 window.location='/';
               }}>Logout</Button>
             ) : (
-                <Button variant="outlined" style={{backgroundColor:"#fff"}} onClick={()=>{
-                  localStorage.removeItem('dailyHelper');
-                  window.location='/login';
-                }}>Login</Button>
+              <Button variant="outlined" style={{backgroundColor:"#fff"}} onClick={()=>{
+                localStorage.removeItem('dailyHelper');
+                window.location='/login';
+              }}>Login</Button>
+                // address==="login" && ()
             )}
           </Toolbar>
         </AppBar>

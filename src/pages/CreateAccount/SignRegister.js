@@ -6,7 +6,7 @@ import CreateAccount from './CreateAccount';
 import NavBar from '../../components/NavBar/NavBar';
 
 function SignRegister(props) {
-
+  console.log(window.location.href);
     const [value,setValue]= useState(0);
     const tabChange = (event, newValue) => {
         setValue(newValue);
