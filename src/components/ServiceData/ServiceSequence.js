@@ -13,7 +13,7 @@ export default function ServiceSequence(props) {
   const displayServices = (props) => {
     const { services } = props;
     // console.log(JSON.parse(services));
-    // console.log(services[0]._doc)
+    // console.log(services)
     if (services.length > 0) {
       return services.map((service, index) => {
         // console.log(service);

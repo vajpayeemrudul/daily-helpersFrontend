@@ -7,6 +7,9 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import { Grid,Paper, Avatar,Link } from '@mui/material'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+// import Grid from "@mui/material";
 
 export default function NavBar() {
   const user = JSON.parse(localStorage.getItem("currentUser"));
@@ -15,6 +18,7 @@ export default function NavBar() {
   // temp=temp.split("/");
   // setAdress(temp[temp.length-1]);
   // console.log(address);
+  const avatarStyle={backgroundColor:'#4287f5'}
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
@@ -29,15 +33,19 @@ export default function NavBar() {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography style={{cursor: "pointer"}}variant="h6" component="div" sx={{ flexGrow: 1 }} onClick={()=>{window.location='/'}}>
               DailyHelpers
             </Typography>
             {localStorage.dailyHelper ? (
-              <Button variant="outlined" style={{backgroundColor:"#fff"}} onClick={()=>{
+              <Grid style={{display:"flex"}}>
+                <Button onClick={()=>{window.location="/profile"}}><Avatar style={avatarStyle}><AccountCircleIcon/></Avatar></Button>    
+                <Button variant="outlined" style={{backgroundColor:"#fff",margin:"7px 0 0 10px",height:"40px"}} onClick={()=>{
                 alert("Are you sure to Logout !");
                 localStorage.removeItem('dailyHelper');
                 window.location='/';
               }}>Logout</Button>
+              </Grid>
+
             ) : (
               <Button variant="outlined" style={{backgroundColor:"#fff"}} onClick={()=>{
                 localStorage.removeItem('dailyHelper');

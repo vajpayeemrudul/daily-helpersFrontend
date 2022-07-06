@@ -29,21 +29,36 @@ function CreateAccount() {
   const [usertype, setuserType] = useState("customer");
   // const [serviceProviderData, setData] = useState({ service: '', charge: '' });
 
-  const getBase64 = () => {
-    console.log("base664 avoid")
-    // let file = document.getElementById("image").files[0];
-    //     let reader = new FileReader();
-    //     reader.onloadend = function () {
-    //     setFormData({...formData,profileImg: reader.result});
-    //     console.log(formData);
-    //    };
-    // reader.readAsDataURL(file);
+  const getBase64 =  () => {
+    // console.log("base664 avoid")
+    let file = document.getElementById("image").files[0];
+        let reader = new FileReader();
+        reader.onloadend = async function () {
+        setFormData((prev)=>{
+             return{
+             name: prev.name,
+             username: prev.username,
+             email: prev.email,
+             location: prev.location,
+             password: prev.password,
+             confirmpassword: prev.confirmpassword,
+             service: prev.service,
+             charge: prev.charge,
+             profileImg: reader.result
+            }
+        });
+        await wait();
+        console.log(reader.result);
+       };
+    reader.readAsDataURL(file);
   }
+  const wait = () => new Promise(resolve => setTimeout(resolve, 2000))
   async function sendData(event){
-    // console.log(formData);
+    
     event.preventDefault();
     await getBase64();
-
+    
+    console.log(formData);
     let temp = "https://daily-helpers.herokuapp.com/";
     try{
      const data= await axios.post(temp + 'customer', formData)
@@ -52,8 +67,8 @@ function CreateAccount() {
     catch(error) {
       console.log(error);
     }
-    setFormData(initialState);
-    window.location="/login"
+    // setFormData(initialState);
+    // window.location="/login"
   }
 
   // function getBase64(event){

@@ -30,7 +30,7 @@ function Homescreen(props) {
   if (localStorage.dailyHelper) {
     data = JSON.parse(localStorage.dailyHelper);
   }
-  // console.log();
+  // console.log(JSON.parse(localStorage.dailyHelper));
 
   // return (<h1>Done</h1>);
   // console.log(data);
