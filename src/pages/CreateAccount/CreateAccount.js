@@ -27,6 +27,8 @@ function CreateAccount() {
 
   const [formData, setFormData] = useState(initialState);
   const [usertype, setuserType] = useState("customer");
+  const [img,setImg] = useState("");
+
   // const [serviceProviderData, setData] = useState({ service: '', charge: '' });
 
   const getBase64 =  () => {
@@ -34,25 +36,30 @@ function CreateAccount() {
     let file = document.getElementById("image").files[0];
         let reader = new FileReader();
         reader.onloadend = async function () {
-        setFormData((prev)=>{
-             return{
-             name: prev.name,
-             username: prev.username,
-             email: prev.email,
-             location: prev.location,
-             password: prev.password,
-             confirmpassword: prev.confirmpassword,
-             service: prev.service,
-             charge: prev.charge,
-             profileImg: reader.result
-            }
-        });
+          setFormData((prev)=>({...prev,profileImg:reader.result}));
+        // setFormData((prev)=>{
+        //      return{
+        //      name: prev.name,
+        //      username: prev.username,
+        //      email: prev.email,
+        //      location: prev.location,
+        //      password: prev.password,
+        //      confirmpassword: prev.confirmpassword,
+        //      service: prev.service,
+        //      charge: prev.charge,
+        //      profileImg: reader.result
+        //     }
+        // });
+        setImg(reader.result);
         await wait();
-        console.log(reader.result);
+        // console.log(reader.result);
+        console.log(img);
        };
     reader.readAsDataURL(file);
   }
-  const wait = () => new Promise(resolve => setTimeout(resolve, 2000))
+  const wait = () => new Promise(resolve => setTimeout(resolve, 2000));
+
+
   async function sendData(event){
     
     event.preventDefault();
@@ -116,7 +123,7 @@ function CreateAccount() {
                     <TextField type="number" label="Base Charge" fullWidth value={formData.charge} onChange={(e) => setFormData({ ...formData, charge: e.target.value })} ></TextField>
                     </>):(<></>)}
                     <span>Enter Profile Image</span>
-                    <input id="image" type="file" />
+                    <input id="image" type="file"/>
                      
                     <FormControlLabel
                         control={<Checkbox name="checkedA" />}
