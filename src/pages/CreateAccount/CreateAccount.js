@@ -74,8 +74,8 @@ function CreateAccount() {
     catch(error) {
       console.log(error);
     }
-    // setFormData(initialState);
-    // window.location="/login"
+    setFormData(initialState);
+    window.location="/login"
   }
 
   // function getBase64(event){
