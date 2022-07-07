@@ -19,16 +19,17 @@ export default function ServiceSequence(props) {
         // console.log(service);
         return (
           // <div className="service" key={service._id}>
-          <Grid key={service._id} item xs={12} sm={4} md={3}  container spacing={0} style={{margin:"16px 4%"}} >
+          <Grid key={service._id} item xs={12} sm={4} md={3} lg={2}  container spacing={0} style={{margin:"16px 4%"}} >
                <Card style={{padding:"20px 25px"}}>
                 <CardMedia
                   component="img"
                   height="140"
                   image={service.profileImg}
                   alt="serviceImg"
+                  style={{borderRadius:"8px"}}
                 />
                 <CardContent>
-                  <Typography variant="h5" component="div">
+                  <Typography variant="h5" component="div" style={{}}>
                     {service.service}
                   </Typography>
                   <Typography variant="body1" color="text.secondary">
