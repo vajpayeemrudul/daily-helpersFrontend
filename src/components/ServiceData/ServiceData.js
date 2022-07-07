@@ -1,13 +1,14 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import ServiceSequence from './ServiceSequence';
+import { BASE_URL } from '../../Server';
 
 export default function ServiceData(props) {
 
     const [services, setServices] = useState([]);
     const [tempservices, getTempservices]= useState('');
-
-    const url = 'https://daily-helpers.herokuapp.com/serviceProvider';
+    
+    const url = BASE_URL+'serviceProvider';
 
     useEffect(()=>{
         getAllServices();

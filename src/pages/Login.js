@@ -11,6 +11,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { RepeatOneSharp } from "@mui/icons-material";
+import { BASE_URL } from "../Server";
 //tabChange,setUserData
 function Login(props) {
   const [entry, setEntry] = useState(true);
@@ -23,7 +24,7 @@ function Login(props) {
     
     // alert(JSON.stringify(details));
     try{
-      const response = await axios.post("https://daily-helpers.herokuapp.com/", details);
+      const response = await axios.post(BASE_URL, details);
       // console.log(response.data);
       if(response.data.message === "Ok")
       {

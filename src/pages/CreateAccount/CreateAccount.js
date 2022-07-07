@@ -10,6 +10,7 @@ import FormLabel from '@mui/material/FormLabel';
 import Checkbox from '@mui/material/Checkbox';
 import {Select,MenuItem,InputLabel} from '@mui/material';
 import axios from "axios";
+import { BASE_URL } from "../../Server";
 
 function CreateAccount() {
 
@@ -66,7 +67,7 @@ function CreateAccount() {
     await getBase64();
     
     console.log(formData);
-    let temp = "https://daily-helpers.herokuapp.com/";
+    let temp = BASE_URL;
     try{
      const data= await axios.post(temp + 'customer', formData)
      console.log(data);

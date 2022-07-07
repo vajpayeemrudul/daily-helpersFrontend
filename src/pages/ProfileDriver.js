@@ -14,6 +14,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import axios from "axios";
 import Profile from './Profile';
+import { BASE_URL } from '../Server';
 
 export default function ProfileDriver() {
     if (!localStorage.dailyHelper) {
@@ -25,7 +26,7 @@ export default function ProfileDriver() {
     
     const [arr, setArr] = useState([]);
 
-    const url = 'https://daily-helpers.herokuapp.com/serviceProvider';
+    const url = BASE_URL+'serviceProvider';
 
     useEffect(()=>{
         getAllServices();
@@ -100,7 +101,7 @@ export default function ProfileDriver() {
                                 <TableCell align="right"><Button onClick={async ()=>{
                                   // console.log(data._id);
                                   console.log("click button")
-                                      let result = await axios.post("https://daily-helpers.herokuapp.com/customer/"+data._id,{index: index});
+                                      let result = await axios.post(BASE_URL+"customer/"+data._id,{index: index});
                                       console.log(result);
                                       if(result.data.message === "Done !!")
                                       {

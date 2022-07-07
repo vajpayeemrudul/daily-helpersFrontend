@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import { NavLink } from "react-router-dom";
 import { ConstructionOutlined, Label, LineAxisOutlined } from '@mui/icons-material';
 import axios from "axios";
+import { BASE_URL } from '../Server';
 
 export default function ServiceBook() {
   if(!localStorage.dailyHelper)
@@ -27,7 +28,7 @@ export default function ServiceBook() {
    {
     alert("Are you sure to confirm booking");
     // console.log('confirmed booking')
-    let temp="https://daily-helpers.herokuapp.com/customer/";
+    let temp=BASE_URL+"customer/";
     
     try{
       // console.log(temp+data.customerData._id+"/"+data.service.customerId);
